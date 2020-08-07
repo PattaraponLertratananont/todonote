@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:todonote/add.dart';
+import 'package:todonote/models.dart';
 import 'package:todonote/widgets/list_todo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,6 +41,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String date = DateTime.now().day.toString() + ' / ' + DateTime.now().month.toString() + ' / ' + (DateTime.now().year + 543).toString();
+  List<TodoNote> todoList = [];
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  fetchData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      todoList = prefs.getKeys().toList().map((data) => TodoNote.fromJson(jsonDecode(prefs.getString(data)))).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,11 +83,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 12,
+                    itemCount: todoList.length,
                     itemBuilder: (context, index) {
                       return ListTodo(
-                        isDone: false,
-                        topic: 'GGG',
+                        todo: todoList[index],
                       );
                     },
                   ),
