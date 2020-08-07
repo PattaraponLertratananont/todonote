@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ListTodo extends StatefulWidget {
   final bool isDone;
-  final String toppic;
-  const ListTodo({Key key, this.isDone, this.toppic}) : super(key: key);
+  final String topic;
+  const ListTodo({Key key, this.isDone, this.topic}) : super(key: key);
 
   @override
   _ListTodoState createState() => _ListTodoState();
@@ -22,6 +22,7 @@ class _ListTodoState extends State<ListTodo> {
     return Card(
       child: ListTile(
         leading: Checkbox(
+          activeColor: Theme.of(context).primaryColor,
           value: isDone,
           onChanged: (value) {
             setState(() {
@@ -29,7 +30,7 @@ class _ListTodoState extends State<ListTodo> {
             });
           },
         ),
-        title: Text(widget.toppic),
+        title: Text(widget.topic),
         trailing: IconButton(
           splashRadius: 20.0,
           highlightColor: Colors.transparent,

@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => HomePage(),
         '/add': (context) => AddTodo(),
       },
+      builder: (context, child) {
+        return ScrollConfiguration(behavior: MyBehavior(), child: child);
+      },
     );
   }
 }
@@ -62,11 +65,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 6,
+                    itemCount: 12,
                     itemBuilder: (context, index) {
                       return ListTodo(
                         isDone: false,
-                        toppic: 'GGG',
+                        topic: 'GGG',
                       );
                     },
                   ),
@@ -94,5 +97,12 @@ class _HomePageState extends State<HomePage> {
         onPressed: () => Navigator.of(context).pushNamed('/add'),
       ),
     );
+  }
+}
+
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }
