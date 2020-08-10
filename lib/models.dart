@@ -3,13 +3,16 @@ class TodoNote {
   bool isDone;
   String topic;
   String task;
-  TodoNote(this.uuid, {this.isDone, this.topic, this.task});
+  List<String> tag;
+
+  TodoNote({this.uuid, this.isDone, this.topic, this.task, this.tag});
 
   TodoNote.fromJson(Map<String, dynamic> json) {
     uuid = json['uuid'];
     isDone = json['isDone'];
     topic = json['topic'];
     task = json['task'];
+    tag = json['tag'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -18,6 +21,7 @@ class TodoNote {
     data['isDone'] = this.isDone;
     data['topic'] = this.topic;
     data['task'] = this.task;
+    data['tag'] = this.tag;
     return data;
   }
 }
