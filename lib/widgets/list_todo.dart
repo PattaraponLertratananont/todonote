@@ -92,6 +92,7 @@ class _ListTodoState extends State<ListTodo> {
         );
         time = Timer(Duration(seconds: 5), () {
           prefs.remove(_todo.uuid);
+          Scaffold.of(context).dispose();
         });
       },
     );

@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:todonote/add.dart';
-import 'package:todonote/models.dart';
-import 'package:todonote/widgets/list_todo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import './widgets/add/add.dart';
+import './models.dart';
+import './widgets/list_todo.dart';
 
 void main() {
   runApp(MyApp());
